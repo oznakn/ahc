@@ -45,7 +45,7 @@ class UsrpApplicationLayer(ComponentModel):
     
     def on_message_from_bottom(self, eventobj: Event):
         evt = Event(self, EventTypes.MFRT, eventobj.eventcontent)
-        print(f"I am Node.{self.componentinstancenumber}, received from Node.{eventobj.eventcontent.header.messagefrom} a message: {eventobj.eventcontent.payload}")    
+        print(f"node.{self.componentinstancenumber}, message: {eventobj.eventcontent.payload}")    
         if self.componentinstancenumber == 1:
             evt.eventcontent.header.messageto = 0
             evt.eventcontent.header.messagefrom = 1
@@ -113,7 +113,7 @@ def main():
 
     topo.start()
     
-    for _ in range(2):
+    for _ in range(1):
         topo.nodes[1].appl.send_self(Event(topo.nodes[0], UsrpApplicationLayerEventTypes.STARTBROADCAST, None))
         time.sleep(0.1)
 
