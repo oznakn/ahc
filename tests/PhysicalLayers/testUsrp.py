@@ -113,7 +113,7 @@ def main():
 
     topo.start()
     
-    for _ in range(40):
+    for _ in range(5):
         topo.nodes[1].appl.send_self(Event(topo.nodes[0], UsrpApplicationLayerEventTypes.STARTBROADCAST, None))
         time.sleep(0.1)
 
