@@ -45,7 +45,7 @@ class UsrpApplicationLayer(ComponentModel):
     
     def on_message_from_bottom(self, eventobj: Event):
         evt = Event(self, EventTypes.MFRT, eventobj.eventcontent)
-        print(f"node.{self.componentinstancenumber}, message: {eventobj.eventcontent.payload}")    
+        # print(f"node.{self.componentinstancenumber}, message: {eventobj.eventcontent.payload}")    
         if self.componentinstancenumber == 1:
             evt.eventcontent.header.messageto = 0
             evt.eventcontent.header.messagefrom = 1
