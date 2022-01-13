@@ -45,7 +45,7 @@ class UsrpApplicationLayer(ComponentModel):
     
     def on_message_from_bottom(self, eventobj: Event):
         evt = Event(self, EventTypes.MFRT, eventobj.eventcontent)
-        # print(f"node.{self.componentinstancenumber}, message: {eventobj.eventcontent.payload}")    
+        print(f"node.{self.componentinstancenumber}, message: {eventobj.eventcontent.payload}")    
         if self.componentinstancenumber == 1:
             evt.eventcontent.header.messageto = 0
             evt.eventcontent.header.messagefrom = 1
@@ -105,7 +105,7 @@ def main():
     topo = Topology()
 # Note that the topology has to specific: usrp winslab_b210_0 is run by instance 0 of the component
 # Therefore, the usrps have to have names winslab_b210_x where x \in (0 to nodecount-1)
-    topo.construct_winslab_topology_without_channels(2, UsrpNode)
+    topo.construct_winslab_topology_without_channels(5, UsrpNode)
   # topo.construct_winslab_topology_with_channels(2, UsrpNode, FIFOBroadcastPerfectChannel)
   
   # time.sleep(1)
@@ -113,7 +113,7 @@ def main():
 
     topo.start()
     
-    for _ in range(1):
+    for _ in range(10):
         topo.nodes[1].appl.send_self(Event(topo.nodes[0], UsrpApplicationLayerEventTypes.STARTBROADCAST, None))
         time.sleep(0.1)
 
